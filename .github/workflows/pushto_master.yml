@@ -73,14 +73,15 @@ jobs:
           sharp --input **/*.png --output {dir}/{name}.webp --format "webp"
           sharp --input **/*.jpg --output {dir}/{name}.webp --format "webp"
 
-
+      # NODE_ENV=production
       # Install PostCSS & PostCSS-CLI
       - name: PostCSS for tailwind
         run: |
           npm install -g postcss postcss-cli
           cd ./wp-content/themes/${{env.theme}}/src/assets/css
-          NODE_ENV=production postcss  ./tailwind.css --config postcss.config.js --output ./style.css
-          
+          postcss ./tailwind.css --config postcss.config.js --output ./style.css
+
+
           
       # Install Composer Packages in wp-plugin__ and wp-theme__ folders
       - name: Composer Install
