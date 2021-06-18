@@ -50,6 +50,8 @@ git commit -m "New LIVE Release"
 git push origin master
 ```
 
+Now a manual release in github will need to be made.
+
 ## Changelog
 
-v0.0.1 - Setup repo
+v1.0.0 - Setup repo and initial release of LABS V2.0.0
