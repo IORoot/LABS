@@ -28,7 +28,7 @@ env:
   #    MySQL Password for ldnpk${{ env.server }} user.  
   #    Generate secure password using keepass for this new user.
   # 
-  # 3. {{secrets.MYSQL_ROOT_PASSWORD}}
+  # 3. {{secrets.MYSQL_ROOT_PASSWORD}} 
   #    MySQL Password for root user.
   #    Stored in Keepass.
 
