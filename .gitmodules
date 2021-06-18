@@ -79,3 +79,6 @@
 [submodule "wp-content/plugins/wp-plugin__thumbnail-folders"]
 	path = wp-content/plugins/wp-plugin__thumbnail-folders
 	url = https://github.com/IORoot/wp-plugin__thumbnail-folders.git
+[submodule "wp-content/themes/wp-theme__labs-londonparkour"]
+	path = wp-content/themes/wp-theme__labs-londonparkour
+	url = https://github.com/IORoot/wp-theme__labs-londonparkour.git
