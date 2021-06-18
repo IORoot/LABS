@@ -13,7 +13,7 @@ on:
 env:
   server: staginglabs
   ssh:    'root@londonparkour.com'
-  dest:   '/var/www/vhosts/staginglabs.londonparkour.com/'
+  dest:   '/var/www/vhosts/${{ env.server }}.londonparkour.com'     # no slash on the end
   theme:  'wp-theme__labs-londonparkour'
   devdb:  'labs_londonparkour_com'
 
