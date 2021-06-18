@@ -15,7 +15,7 @@ env:
   ssh:    'root@londonparkour.com'
   dest:   '/var/www/vhosts/staginglabs.londonparkour.com'     # no slash on the end
   theme:  'wp-theme__labs-londonparkour'
-  devdb:  'labs_londonparkour_com's
+  devdb:  'labs_londonparkour_com'
 
   # ┌─────────────────────────────────────┐
   # │          SECRETS REQUIRED           │
