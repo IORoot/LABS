@@ -1,0 +1,81 @@
+[submodule "wp-content/plugins/wp-plugin__acf--codemirror"]
+	path = wp-content/plugins/wp-plugin__acf--codemirror
+	url = https://github.com/IORoot/wp-plugin__acf--codemirror.git
+[submodule "wp-content/plugins/wp-plugin__admin--remove-comments"]
+	path = wp-content/plugins/wp-plugin__admin--remove-comments
+	url = https://github.com/IORoot/wp-plugin__admin--remove-comments.git
+[submodule "wp-content/plugins/wp-plugin__admin-themes"]
+	path = wp-content/plugins/wp-plugin__admin-themes
+	url = https://github.com/IORoot/wp-plugin__admin-themes.git
+[submodule "wp-content/plugins/wp-plugin__CPT--blog"]
+	path = wp-content/plugins/wp-plugin__CPT--blog
+	url = https://github.com/IORoot/wp-plugin__CPT--blog.git
+[submodule "wp-content/plugins/wp-plugin__cpt--demonstration"]
+	path = wp-content/plugins/wp-plugin__cpt--demonstration
+	url = https://github.com/IORoot/wp-plugin__cpt--demonstration.git
+[submodule "wp-content/plugins/wp-plugin__cpt--tutorial"]
+	path = wp-content/plugins/wp-plugin__cpt--tutorial
+	url = https://github.com/IORoot/wp-plugin__cpt--tutorial.git
+[submodule "wp-content/plugins/wp-plugin__auto-menu"]
+	path = wp-content/plugins/wp-plugin__auto-menu
+	url = https://github.com/IORoot/wp-plugin__auto-menu.git
+[submodule "wp-content/plugins/wp-pluging__menu--code-inject"]
+	path = wp-content/plugins/wp-pluging__menu--code-inject
+	url = https://github.com/IORoot/wp-pluging__menu--code-inject.git
+[submodule "wp-content/plugins/wp-plugin__menus--responsive"]
+	path = wp-content/plugins/wp-plugin__menus--responsive
+	url = https://github.com/IORoot/wp-plugin__menus--responsive.git
+[submodule "wp-content/plugins/wp-plugin__page-builder"]
+	path = wp-content/plugins/wp-plugin__page-builder
+	url = https://github.com/IORoot/wp-plugin__page-builder.git
+[submodule "wp-content/plugins/wp-plugin__page-builder--flickity"]
+	path = wp-content/plugins/wp-plugin__page-builder--flickity
+	url = https://github.com/IORoot/wp-plugin__page-builder--flickity.git
+[submodule "wp-content/plugins/wp-plugin__page-builder--isotope"]
+	path = wp-content/plugins/wp-plugin__page-builder--isotope
+	url = https://github.com/IORoot/wp-plugin__page-builder--isotope.git
+[submodule "wp-content/plugins/wp-plugin__page-builder--yt-lite"]
+	path = wp-content/plugins/wp-plugin__page-builder--yt-lite
+	url = https://github.com/IORoot/wp-plugin__page-builder--yt-lite.git
+[submodule "wp-content/plugins/wp-plugin__api-scraper"]
+	path = wp-content/plugins/wp-plugin__api-scraper
+	url = https://github.com/IORoot/wp-plugin__api-scraper.git
+[submodule "wp-content/plugins/wp-plugin__generative-images"]
+	path = wp-content/plugins/wp-plugin__generative-images
+	url = https://github.com/IORoot/wp-plugin__generative-images.git
+[submodule "wp-content/plugins/wp-plugin__andyp-plugins"]
+	path = wp-content/plugins/wp-plugin__andyp-plugins
+	url = https://github.com/IORoot/wp-plugin__andyp-plugins.git
+[submodule "wp-content/plugins/wp-plugin__regex-posts"]
+	path = wp-content/plugins/wp-plugin__regex-posts
+	url = https://github.com/IORoot/wp-plugin__regex-posts.git
+[submodule "wp-content/plugins/wp-plugin__shortcode--breadcrumbs"]
+	path = wp-content/plugins/wp-plugin__shortcode--breadcrumbs
+	url = https://github.com/IORoot/wp-plugin__shortcode--breadcrumbs.git
+[submodule "wp-content/plugins/wp-plugin__shortcode--facts"]
+	path = wp-content/plugins/wp-plugin__shortcode--facts
+	url = https://github.com/IORoot/wp-plugin__shortcode--facts.git
+[submodule "wp-content/plugins/wp-plugin__shortcode--fetch"]
+	path = wp-content/plugins/wp-plugin__shortcode--fetch
+	url = https://github.com/IORoot/wp-plugin__shortcode--fetch.git
+[submodule "wp-content/plugins/wp-plugin__shortcode--random-image-url"]
+	path = wp-content/plugins/wp-plugin__shortcode--random-image-url
+	url = https://github.com/IORoot/wp-plugin__shortcode--random-image-url.git
+[submodule "wp-content/plugins/wp-plugin__shortcode--tree"]
+	path = wp-content/plugins/wp-plugin__shortcode--tree
+	url = https://github.com/IORoot/wp-plugin__shortcode--tree.git
+[submodule "wp-content/plugins/wp-plugin__taxonomy--extra"]
+	path = wp-content/plugins/wp-plugin__taxonomy--extra
+	url = https://github.com/IORoot/wp-plugin__taxonomy--extra.git
+[submodule "wp-content/plugins/wp-plugin__theme--custom-structure"]
+	path = wp-content/plugins/wp-plugin__theme--custom-structure
+	url = https://github.com/IORoot/wp-plugin__theme--custom-structure.git
+[submodule "wp-content/plugins/wp-plugin__footer"]
+	path = wp-content/plugins/wp-plugin__footer
+	url = https://github.com/IORoot/wp-plugin__footer.git
+[submodule "wp-content/plugins/wp-plugin__page-builder--rawcode"]
+	path = wp-content/plugins/wp-plugin__page-builder--rawcode
+	url = https://github.com/IORoot/wp-plugin__page-builder--rawcode.git
+[submodule "wp-content/plugins/wp-plugin__thumbnail-folders"]
+	path = wp-content/plugins/wp-plugin__thumbnail-folders
+	url = https://github.com/IORoot/wp-plugin__thumbnail-folders.git
