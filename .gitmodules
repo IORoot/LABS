@@ -110,3 +110,6 @@
 	path = wp-content/themes/wp-theme__labs-londonparkour
 	url = https://github.com/IORoot/wp-theme__labs-londonparkour.git
 	ignore = dirty
+[submodule "wp-content/uploads"]
+	path = wp-content/uploads
+	url = https://github.com/IORoot/uploads__labs.git
