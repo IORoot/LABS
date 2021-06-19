@@ -44,13 +44,14 @@ jobs:
     # ---------------------------------------------------------
 
     steps:
-          
+
+
       # Checkout repo with submodules
       # https://github.com/marketplace/actions/checkout-sub modules 
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-          
+      
       
       # https://dev.to/shofol/run-your-github-actions-jobs-from-a-specific-directory-1i9e
       - name: Use Node.js 14.x
@@ -75,11 +76,11 @@ jobs:
 
       # NODE_ENV=production
       # Install PostCSS & PostCSS-CLI
-      - name: PostCSS for tailwind
-        run: |
-          npm install -g postcss postcss-cli
-          cd ./wp-content/themes/${{env.theme}}/src/assets/css
-          postcss ./tailwind.css --config postcss.config.js --output ./style.css
+      # - name: PostCSS for tailwind
+      #   run: |
+      #     npm install -g postcss postcss-cli
+      #     cd ./wp-content/themes/${{env.theme}}/src/assets/css
+      #     postcss ./tailwind.css --config postcss.config.js --output ./style.css
 
 
           
@@ -119,6 +120,10 @@ jobs:
             mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -e "DROP DATABASE IF EXISTS ${{ env.server }}_londonparkour_com"
             mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -e "CREATE DATABASE ${{ env.server }}_londonparkour_com"
             mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -h localhost ${{ env.server }}_londonparkour_com < ${{env.dest}}/wp-content/database/${{ env.server }}_londonparkour_com.sql
+            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_posts SET guid = replace(guid, '${{ env.devdb }}','${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
+            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_posts SET post_content = replace(post_content, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
+            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_postmeta SET meta_value = replace(meta_value, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
+            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_options SET option_value = replace(option_value, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com     
 
 
       # Clone wordpress fresh install
@@ -163,21 +168,17 @@ jobs:
           command: |
             cd ${{env.dest}}
             sudo -u www-data wp plugin activate --all
-            sudo -u www-data wp plugin delete hello akismet
             sudo -u www-data wp plugin update --all
+            sudo -u www-data wp plugin delete hello akismet
             sudo -u www-data wp theme delete twentynineteen twentytwenty twentytwentyone
-  
+            sudo -u www-data wp eval 'flush_rewrite_rules();'
 
-        # SEARCH/REPLACE Database
-      - name: Search & Replace in Database
-        uses: JimCronqvist/action-ssh@master
-        with:
-          hosts: ${{env.ssh}}
-          privateKey: ${{secrets.DEPLOY_KEY}}
-          command: |
-            cd ${{env.dest}}
-            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_posts SET guid = replace(guid, '${{ env.devdb }}','${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
-            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_posts SET post_content = replace(post_content, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
-            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_postmeta SET meta_value = replace(meta_value, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
-            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_options SET option_value = replace(option_value, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com     
-            
+
+      # WGET all pages as static assets for postCSS to prune for tailwind
+      - name: PostCSS for tailwind
+        run: |
+          npm install -g postcss postcss-cli
+          cd ./wp-content/themes/${{env.theme}}/src/assets/css/file_scans
+          wget --input-file=page_scan_list --directory-prefix=files/ --adjust-extension -q --show-progress --no-check-certificate
+          cd ..
+          NODE_ENV=production postcss ./tailwind.css --config postcss.config.js --output ./style.css
