@@ -169,8 +169,12 @@ jobs:
       # WGET all pages as static assets for postCSS to prune for tailwind
       # npm install -g postcss postcss-cli on server! 
       - name: PostCSS for tailwind
-        run: |
-          cd ./wp-content/themes/${{env.theme}}/src/assets/css/file_scans
-          wget --input-file=page_scan_list --directory-prefix=files/ --adjust-extension -q --show-progress --no-check-certificate --base=https://${{env.server}}.londonparkour.com
-          cd ..
-          NODE_ENV=production /usr/local/bin/postcss ./tailwind.css --config postcss.config.js --output ./style.css
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{env.ssh}}
+          privateKey: ${{secrets.DEPLOY_KEY}}
+          command: |
+            cd ${{env.dest}}/wp-content/themes/${{env.theme}}/src/assets/css/file_scans
+            wget --input-file=page_scan_list --directory-prefix=files/ --adjust-extension -q --show-progress --no-check-certificate --base=https://${{env.server}}.londonparkour.com
+            cd ..
+            NODE_ENV=production /usr/local/bin/postcss ./tailwind.css --config postcss.config.js --output ./style.css
