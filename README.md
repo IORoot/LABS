@@ -23,19 +23,6 @@ This is a bash script in the script-library repository (https://github.com/IORoo
 
 The `gitdeploy` command also takes a single argument to push to another branch.
 
-## Deployment with tests (QA)
-
-To trigger tests, you can do this in two ways:
-
-1. To globally run ALL tests, you can add `-test` into the commit message and push to `master` branch.
-1. To run an individual test, you can add it's specific name as a flag to the commit message and push to the `master` branch.
-    1. `-lighthouse`
-    1. `-links`
-    1. `-browserstack`s
-    1. `-pa11y`
-    1. `-screencpature`
-    1. `-validator`
-
 
 ## Deployment to LIVE
 
