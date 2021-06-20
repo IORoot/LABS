@@ -12,6 +12,7 @@ on:
 # └─────────────────────────────────────┘
 env:
   server: staginglabs
+  dbfile: 'labs_londonparkour_com.sql'
   ssh:    'root@londonparkour.com'
   dest:   '/var/www/vhosts/staginglabs.londonparkour.com'     # no slash on the end
   theme:  'wp-theme__labs-londonparkour'
@@ -108,10 +109,10 @@ jobs:
             git stash pop
             mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e  "CREATE USER IF NOT EXISTS 'ldnpk${{ env.server }}'@'localhost' IDENTIFIED BY '${{secrets.MYSQL_PASSWORD}}';"
             mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e  "GRANT ALL on ${{ env.server }}_londonparkour_com.* to 'ldnpk${{ env.server }}'@'localhost';"
-            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e  "FLUSH PRIVILEGES;"
+            mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e  "FLUSH PRIVILEGES;"s
             mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -e "DROP DATABASE IF EXISTS ${{ env.server }}_londonparkour_com"
             mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -e "CREATE DATABASE ${{ env.server }}_londonparkour_com"
-            mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -h localhost ${{ env.server }}_londonparkour_com < ${{env.dest}}/wp-content/database/${{ env.server }}_londonparkour_com.sql
+            mysql -uldnpk${{ env.server }} -p${{secrets.MYSQL_PASSWORD}} -h localhost ${{ env.server }}_londonparkour_com < ${{env.dest}}/wp-content/database/${{ env.dbfile }}
             mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_posts SET guid = replace(guid, '${{ env.devdb }}','${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
             mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_posts SET post_content = replace(post_content, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com
             mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_postmeta SET meta_value = replace(meta_value, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com

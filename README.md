@@ -4,7 +4,7 @@
 
 To deploy onto the staging server you can push to the `master` git branch. This will trigger the necessary steps to fully build the site from the code in this repository.
 
-Use "-nodeploy" in the commit message to not run a deploy and just commit to repo.
+Use "-nodeploy" in the commit message   to not run a deploy and just commit to repo.
 
 ## Updating this repository with the vagrant version
 
