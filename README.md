@@ -30,17 +30,11 @@ The `gitdeploy` command also takes a single argument to push to another branch.
 
 To deploy to the live server, you need to add a release to this repository.
 
-To do this, add a new release tag and push to master.
-
 ```
-git tag v2.0.0
-git add .
-git commit -m "New LIVE Release"
-git push origin master
+github > Releases > Draft a new Release
 ```
-
-Now a manual release in github will need to be made.
 
 ## Changelog
 
+v1.0.1 - Fixed GUID issue with the tree shortcode plugin. Also added gitdeploy.sh command.
 v1.0.0 - Setup repo and initial release of LABS V2.0.0
