@@ -36,16 +36,16 @@ env:
 jobs:
 
   build:
+
+    name: Build and Deploy to Server
     runs-on: ubuntu-latest
 
-    # RUN IF -nodeploy is NOT in commit message
-    # Allows you to commit without running the actions.
+    # RUN IF -nodeploy is NOT in commit message - Allows you to commit without running the actions.
     # ---------------------------------------------------------
     if: "!contains(github.event.head_commit.message, '-nodeploy')"
     # ---------------------------------------------------------
 
     steps:
-
 
       # Checkout repo with submodules
       # https://github.com/marketplace/actions/checkout-sub modules 
@@ -76,7 +76,6 @@ jobs:
           sharp --input **/*.jpg --output {dir}/{name}.webp --format "webp"
 
 
-
       # Install Composer Packages in wp-plugin__ and wp-theme__ folders
       - name: Composer Install
         run: |
@@ -95,6 +94,12 @@ jobs:
             --exclude /.github/ \
             ./ ${{env.ssh}}:${{env.dest}}            
 
+  database:
+
+    name: Install Database
+    needs: build            # wait for buildto finish.
+    runs-on: ubuntu-latest
+    steps:
 
       # Install Database
       - name: Install Database
@@ -119,6 +124,13 @@ jobs:
             mysql -uroot -p${{secrets.MYSQL_ROOT_PASSWORD}} -e "UPDATE wp_options SET option_value = replace(option_value, '${{ env.devdb }}', '${{ env.server }}.londonparkour');" ${{ env.server }}_londonparkour_com     
 
 
+  wordpress:
+
+    name: Install Wordpress
+    needs: build            # wait for buildto finish.
+    runs-on: ubuntu-latest
+    steps:
+
       # Clone wordpress fresh install
       - name: Install Wordpress
         uses: JimCronqvist/action-ssh@master
@@ -132,6 +144,14 @@ jobs:
             rm latest.tar.gz
 
 
+  secrets:
+
+    name: Use REAL wp-config. 
+    needs: build, wordpress
+    if: always()                # dependencies do not have to be successful.
+    runs-on: ubuntu-latest
+    steps:
+
       # Copy secrets into plugins
       - name: Copy Secrets
         uses: JimCronqvist/action-ssh@master
@@ -142,6 +162,13 @@ jobs:
             cp ${{env.dest}}/../${{env.server}}-config.php ${{env.dest}}/wp-config.php
 
 
+  chown:
+
+    name: Change Ownership
+    needs: build, wordpress,secrets
+    runs-on: ubuntu-latest
+    steps:
+
       # Chown to www-data:www-data
       - name: Chown 
         uses: JimCronqvist/action-ssh@master
@@ -151,6 +178,12 @@ jobs:
           command: |
             chown -Rf www-data:www-data ${{env.dest}}
 
+  plugins:
+
+    name: Wordpress Plugins
+    needs: build, wordpress, secrets, chown
+    runs-on: ubuntu-latest
+    steps:
 
       # Activate plugins
       - name: Setup Plugins
@@ -166,18 +199,12 @@ jobs:
             sudo -u www-data wp theme delete twentynineteen twentytwenty twentytwentyone
             sudo -u www-data wp eval 'flush_rewrite_rules();'
 
-
-
-
-
-
   postcss:
 
     name: PostCSS for Production
     needs: build            # wait for buildto finish.
     if: always()            # dependencies do not have to be successful.
     runs-on: ubuntu-latest
-
     steps:
 
       - name: PostCSS for tailwind
