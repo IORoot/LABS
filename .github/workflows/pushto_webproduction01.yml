@@ -167,8 +167,23 @@ jobs:
             sudo -u www-data wp eval 'flush_rewrite_rules();'
 
 
-      # WGET all pages as static assets for postCSS to prune for tailwind
-      # npm install -g postcss postcss-cli on server! 
+
+
+
+
+  postcss:
+
+    name: PostCSS for Production
+    needs: build            # wait for buildto finish.
+    if: always()            # dependencies do not have to be successful.
+    runs-on: ubuntu-latest
+
+    # ---------------------------------------------------------
+    if: "!contains(github.event.head_commit.message, '-nodeploy')"
+    # ---------------------------------------------------------
+
+    steps:
+
       - name: PostCSS for tailwind
         uses: JimCronqvist/action-ssh@master
         with:
