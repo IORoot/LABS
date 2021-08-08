@@ -28,10 +28,15 @@ The `gitdeploy` command also takes a single argument to push to another branch.
 
 ## Deployment to LIVE
 
-To deploy to the live server, you need to add a release to this repository.
+To deploy to the live server, you need to first add a release to this repository.
 
 ```
 github > Releases > Draft a new Release
+```
+
+Then manually run the action.
+```
+github > Actions > [LIVE] Create a release > Run Workflow
 ```
 
 ## Changelog
