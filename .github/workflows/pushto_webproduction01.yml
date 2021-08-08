@@ -147,7 +147,7 @@ jobs:
   secrets:
 
     name: Use REAL wp-config. 
-    needs: build, wordpress
+    needs: [build, wordpress]
     runs-on: ubuntu-latest
     steps:
 
@@ -164,7 +164,7 @@ jobs:
   chown:
 
     name: Change Ownership
-    needs: build, wordpress,secrets
+    needs: [build, wordpress,secrets]
     runs-on: ubuntu-latest
     steps:
 
@@ -180,7 +180,7 @@ jobs:
   plugins:
 
     name: Wordpress Plugins
-    needs: build, wordpress, secrets, chown
+    needs: [build, wordpress, secrets, chown]
     runs-on: ubuntu-latest
     steps:
 
