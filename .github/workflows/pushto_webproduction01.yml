@@ -178,10 +178,6 @@ jobs:
     if: always()            # dependencies do not have to be successful.
     runs-on: ubuntu-latest
 
-    # ---------------------------------------------------------
-    if: "!contains(github.event.head_commit.message, '-nodeploy')"
-    # ---------------------------------------------------------
-
     steps:
 
       - name: PostCSS for tailwind
