@@ -214,4 +214,4 @@ jobs:
           privateKey: ${{secrets.DEPLOY_KEY}}
           command: |
             cd ${{env.dest}}/wp-content/themes/${{env.theme}}/src/assets/css/;
-            NODE_ENV=production /usr/bin/postcss ./tailwind.css --config postcss.config.js --output ./style.css;
+            NODE_ENV=production /usr/bin/postcss --verbose ./tailwind.css --config postcss.config.js --output ./style.css;
