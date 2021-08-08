@@ -4,7 +4,13 @@ GIT_BRANCH='master'
 LOCAL_PROJECT_LOCATION='/Users/andrewpearson/code/LondonParkour.com/dev.labs.londonparkour.com'
 VAGRANT_MACHINE='labs.londonparkour.com'
 DUMP_COMMAND='dev.labs.londonparkour.com_dumpdb'
+ANSWERDB=FALSE
 
+question_vagrant_db(){  
+    printf "${Cyan}Do you want to get the Vagrant DB. Y/n?\n"
+    read ANSWERDB
+    export ANSWERDB
+}
 
 get_vagrant_id(){
 
@@ -33,6 +39,11 @@ move_vagrant_db_to_deploy_repo(){
     printf "${Green}Moved to ./wp-content/database/\n"
 }
 
+question_submodules(){  
+    printf "${Cyan}Do you want to update all Submodules? Y/n?\n"
+    read ANSWERSUBMODULES
+    export ANSWERSUBMODULES
+}
 
 update_all_submodules(){
     printf "${Cyan}Updating all git submodules recursively.\n"
@@ -82,9 +93,18 @@ cli_colours() {
 
 cli_colours
 pre_deploy_message
-get_vagrant_id 
-dump_database  
-move_vagrant_db_to_deploy_repo 
-update_all_submodules 
+
+question_vagrant_db
+if [ "$ANSWERDB" != "${ANSWERDB#[Yy]}" ] ;then
+    get_vagrant_id 
+    dump_database  
+    move_vagrant_db_to_deploy_repo 
+fi
+
+question_submodules
+if [ "$ANSWERSUBMODULES" != "${ANSWERSUBMODULES#[Yy]}" ] ;then
+    update_all_submodules
+fi
+
 commit_changes_to_repo 
 post_deploy_message

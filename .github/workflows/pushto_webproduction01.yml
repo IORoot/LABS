@@ -1,6 +1,6 @@
 # -nodeploy to commit and not run.
 
-name: (LIVE) Create a Release
+name: (LIVE) WP01 RELEASE
 
 on:
 
