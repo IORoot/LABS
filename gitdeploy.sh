@@ -71,8 +71,7 @@ pre_deploy_message(){
 
 post_deploy_message(){
     printf "\n${Red}Post-Deploy Tasks.\n"
-    printf "${Orange}1. Manually login to GCal Sync OAUTH.\n"
-    printf "${Orange}2. Enter License into WP Real Media Library Plugin.\n\n"
+    printf "${Orange}1. Enter License into WP Real Media Library Plugin.\n\n"
 
     printf "\n${Red}Push to LIVE by creating a repository release.\n"
 }
