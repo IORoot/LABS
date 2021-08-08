@@ -148,7 +148,6 @@ jobs:
 
     name: Use REAL wp-config. 
     needs: build, wordpress
-    if: always()                # dependencies do not have to be successful.
     runs-on: ubuntu-latest
     steps:
 
@@ -203,7 +202,6 @@ jobs:
 
     name: PostCSS for Production
     needs: build            # wait for buildto finish.
-    if: always()            # dependencies do not have to be successful.
     runs-on: ubuntu-latest
     steps:
 
