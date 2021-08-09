@@ -211,7 +211,8 @@ jobs:
           hosts: ${{env.ssh}}
           privateKey: ${{secrets.DEPLOY_KEY}}
           command: |
-            rm -Rf ${{env.dest}}/wp-content/themes/${{env.theme}}/node_modules
+            cd ${{env.dest}}/wp-content/themes/${{env.theme}}
+            rm -Rf node_modules
             npm install
 
 
