@@ -205,13 +205,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: NPM Rebuild node_modules
+      - name: Complete
         uses: JimCronqvist/action-ssh@master
         with:
           hosts: ${{env.ssh}}
           privateKey: ${{secrets.DEPLOY_KEY}}
           command: |
-            cd ${{env.dest}}/wp-content/themes/${{env.theme}}
-            rm -Rf node_modules
-            rm package-lock.json
-            npm install
+            echo "$(date), deploy complete from github action pusto_webproduction01.yml " >> /tmp/github-actions.log
