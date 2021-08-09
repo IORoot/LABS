@@ -198,10 +198,27 @@ jobs:
             sudo -u www-data wp theme delete twentynineteen twentytwenty twentytwentyone
             sudo -u www-data wp eval 'flush_rewrite_rules();'
 
+  npm:
+
+    name: rebuild node_modules
+    needs: plugins       
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: NPM Rebuild node_modules
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{env.ssh}}
+          privateKey: ${{secrets.DEPLOY_KEY}}
+          command: |
+            rm -Rf ${{env.dest}}/wp-content/themes/${{env.theme}}/node_modules
+            npm install
+
+
   postcss:
 
     name: PostCSS TailwindCSS
-    needs: plugins       
+    needs: npm       
     runs-on: ubuntu-latest
     steps:
 
