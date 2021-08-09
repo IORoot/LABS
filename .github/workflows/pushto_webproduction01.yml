@@ -201,7 +201,7 @@ jobs:
   postcss:
 
     name: PostCSS TailwindCSS
-    needs: build       
+    needs: plugins       
     runs-on: ubuntu-latest
     steps:
 
@@ -211,5 +211,4 @@ jobs:
           hosts: ${{env.ssh}}
           privateKey: ${{secrets.DEPLOY_KEY}}
           command: |
-            cd ${{env.dest}}/wp-content/themes/${{env.theme}}/src/assets/css/
-            NODE_ENV=production /usr/bin/postcss --verbose ./tailwind.css --config postcss.config.js --output ./style.css;
+            /usr/local/bin/postinstall_postcss.sh  
