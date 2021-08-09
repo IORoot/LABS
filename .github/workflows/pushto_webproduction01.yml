@@ -97,7 +97,7 @@ jobs:
   database:
 
     name: Install Database
-    needs: build            # wait for buildto finish.
+    needs: build            
     runs-on: ubuntu-latest
     steps:
 
@@ -127,7 +127,7 @@ jobs:
   wordpress:
 
     name: Install Wordpress
-    needs: build            # wait for buildto finish.
+    needs: build           
     runs-on: ubuntu-latest
     steps:
 
@@ -180,7 +180,7 @@ jobs:
   plugins:
 
     name: Wordpress Plugins
-    needs: [build, wordpress, secrets, chown]
+    needs: [build, wordpress, database, secrets, chown]
     runs-on: ubuntu-latest
     steps:
 
@@ -200,8 +200,8 @@ jobs:
 
   postcss:
 
-    name: PostCSS for Production
-    needs: build            # wait for buildto finish.
+    name: PostCSS TailwindCSS
+    needs: build       
     runs-on: ubuntu-latest
     steps:
 
@@ -211,5 +211,5 @@ jobs:
           hosts: ${{env.ssh}}
           privateKey: ${{secrets.DEPLOY_KEY}}
           command: |
-            cd ${{env.dest}}/wp-content/themes/${{env.theme}}/src/assets/css/;
+            cd ${{env.dest}}/wp-content/themes/${{env.theme}}/src/assets/css/
             NODE_ENV=production /usr/bin/postcss --verbose ./tailwind.css --config postcss.config.js --output ./style.css;
