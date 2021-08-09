@@ -193,7 +193,6 @@ jobs:
           command: |
             cd ${{env.dest}}
             sudo -u www-data wp plugin activate --all
-            sudo -u www-data wp plugin update --all
             sudo -u www-data wp plugin delete hello akismet
             sudo -u www-data wp theme delete twentynineteen twentytwenty twentytwentyone
             sudo -u www-data wp eval 'flush_rewrite_rules();'
