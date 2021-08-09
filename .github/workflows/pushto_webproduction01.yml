@@ -193,6 +193,25 @@ jobs:
           command: |
             cd ${{env.dest}}
             sudo -u www-data wp plugin activate --all
+            sudo -u www-data wp plugin update --all
             sudo -u www-data wp plugin delete hello akismet
             sudo -u www-data wp theme delete twentynineteen twentytwenty twentytwentyone
             sudo -u www-data wp eval 'flush_rewrite_rules();'
+
+  npm:
+
+    name: rebuild node_modules
+    needs: plugins       
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: NPM Rebuild node_modules
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{env.ssh}}
+          privateKey: ${{secrets.DEPLOY_KEY}}
+          command: |
+            cd ${{env.dest}}/wp-content/themes/${{env.theme}}
+            rm -Rf node_modules
+            rm package-lock.json
+            npm install
