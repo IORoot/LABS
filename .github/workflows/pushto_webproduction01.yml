@@ -211,4 +211,4 @@ jobs:
           hosts: ${{env.ssh}}
           privateKey: ${{secrets.DEPLOY_KEY}}
           command: |
-            /usr/local/bin/postinstall_postcss.sh
+            /usr/local/bin/postinstall_postcss.sh ${{env.dest}} ${{env.theme}}
