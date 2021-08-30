@@ -11,9 +11,9 @@ on:
 # └─────────────────────────────────────┘
 env:
   server: labs
-  ssh:    'root@138.68.159.70'
-  dest:   '/var/www/vhosts/labs.londonparkour.com'     # no slash on the end
-  theme:  'wp-theme__labs-londonparkour'
+  ssh:    'root@142.93.40.219'
+  dest:   '/var/www/vhosts/parkourlabs.com'     # no slash on the end
+  theme:  'labs.londonparkour.com'
   devdb:  'labs_londonparkour_com'
   dbfile: 'labs_londonparkour_com.sql'
 
@@ -74,13 +74,6 @@ jobs:
           cd ./wp-content/uploads
           sharp --input **/*.png --output {dir}/{name}.webp --format "webp"
           sharp --input **/*.jpg --output {dir}/{name}.webp --format "webp"
-
-
-      # Install Composer Packages in wp-plugin__ and wp-theme__ folders
-      - name: Composer Install
-        run: |
-          find . -path "*/wp-plugin*"  ! -path "*/vendor/*" ! -path "*/node_modules/*"  -name "composer.json"  -execdir composer install \;
-          find . -path "./wp-content/themes/wp-theme*"  ! -path "*/vendor/*" ! -path "*/node_modules/*"  -name "composer.json"  -execdir composer install \;
 
 
       # Deploy repo to server
@@ -161,6 +154,26 @@ jobs:
             cp ${{env.dest}}/../${{env.server}}-config.php ${{env.dest}}/wp-config.php
 
 
+  composer:
+
+    name: Composer Install
+    needs: [build,wordpress]
+    runs-on: ubuntu-latest
+    steps:
+
+      # Install Composer Packages in wp-plugin__ and wp-theme__ folders
+      - name: Composer Install
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: ${{env.ssh}}
+          privateKey: ${{secrets.DEPLOY_KEY}}
+          command: |
+            cd ${{env.dest}}
+            find . -path "*/wp-plugin*"  ! -path "*/vendor/*" ! -path "*/node_modules/*"  -name "composer.json"  -execdir composer install \;
+            find . -path "./wp-content/themes/wp-theme*"  ! -path "*/vendor/*" ! -path "*/node_modules/*"  -name "composer.json"  -execdir composer install \;
+
+
+
   chown:
 
     name: Change Ownership
@@ -196,6 +209,7 @@ jobs:
             sudo -u www-data wp plugin update --all
             sudo -u www-data wp plugin delete hello akismet
             sudo -u www-data wp theme delete twentynineteen twentytwenty twentytwentyone
+            sudo -u www-data wp theme activate ${{env.theme}}
             sudo -u www-data wp eval 'flush_rewrite_rules();'
 
   npm:
