@@ -1,7 +1,7 @@
 #!/bin/bash
 
 GIT_BRANCH='master'
-LOCAL_PROJECT_LOCATION='/Users/andypearson/code/LondonParkour.com/dev.labs.londonparkour.com'
+LOCAL_PROJECT_LOCATION='/Users/andypearson/Repository/Code/LondonParkour.com/dev.labs.londonparkour.com'
 VAGRANT_MACHINE='labs.londonparkour.com'
 DUMP_COMMAND='dev.labs.londonparkour.com_dumpdb'
 ANSWERDB=FALSE
