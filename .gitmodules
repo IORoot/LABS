@@ -113,3 +113,8 @@
 [submodule "wp-content/uploads"]
 	path = wp-content/uploads
 	url = https://github.com/IORoot/uploads__labs.git
+	ignore = dirty
+[submodule "wp-content/plugins/wp-plugin__page-builder--epic-slider"]
+	path = wp-content/plugins/wp-plugin__page-builder--epic-slider
+	url = git@github.com:IORoot/wp-plugin__page-builder--epic-slider.git
+	ignore = dirty
